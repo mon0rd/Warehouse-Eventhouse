@@ -1,7 +1,9 @@
 <script>
 	import { onMount } from 'svelte';
+	import { fade } from 'svelte/transition';
 
 	let open = false;
+	let mounted = false;
 	const links = ['History', 'Events', 'Impressum', 'Kontakt'];
 
 	let headerEl;
@@ -39,10 +41,10 @@
 	}
 
 	onMount(() => {
+		mounted = true;
 		document.addEventListener('click', handleDocumentClick);
 		window.addEventListener('scroll', handleScroll);
 		window.addEventListener('keydown', handleKeydown);
-
 		return () => {
 			document.removeEventListener('click', handleDocumentClick);
 			window.removeEventListener('scroll', handleScroll);
@@ -51,39 +53,46 @@
 	});
 </script>
 
-<header class="header" class:open bind:this={headerEl}>
-	<button
-		type="button"
-		class="logo_button"
-		aria-label="Toggle menu"
-		aria-expanded={open}
-		onclick={() => (open = !open)}
-	>
-		<img src="/images/MainLogo.jpg" alt="Warehouse Eventhouse logo" class="main_logo" />
-	</button>
+{#if mounted}
+	<header class="header" class:open bind:this={headerEl} in:fade={{ duration: 600 }}>
+		<button
+			type="button"
+			class="logo_button"
+			aria-label="Toggle menu"
+			aria-expanded={open}
+			onclick={() => (open = !open)}
+		>
+			<img src="/images/MainLogo.jpg" alt="Warehouse Eventhouse logo" class="main_logo" />
+		</button>
 
-	<button
-		class="nav"
-		type="button"
-		onclick={() => (open = !open)}
-		aria-expanded={open}
-		aria-label="Navigation"
-	>
-		<div class="nav_bar"></div>
-		<div class="nav_bar"></div>
-		<div class="nav_bar"></div>
-	</button>
+		<button
+			class="nav"
+			type="button"
+			onclick={() => (open = !open)}
+			aria-expanded={open}
+			aria-label="Navigation"
+		>
+			<div class="nav_bar"></div>
+			<div class="nav_bar"></div>
+			<div class="nav_bar"></div>
+		</button>
 
-	<div class="menu" aria-hidden={!open}>
-		{#each links as link}
-			<a href="/" class="menu_link">{link}</a>
-		{/each}
-	</div>
-</header>
+		<div class="menu" aria-hidden={!open}>
+			{#each links as link}
+				<a href="/" class="menu_link">{link}</a>
+			{/each}
+		</div>
+	</header>
+{/if}
 
 <style lang="sass">
-.header
-  position: relative
+.header  
+  padding-top: 10px
+  height: var(--header-h)
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
   display: flex
   flex-direction: column
   align-items: center
@@ -101,9 +110,8 @@
   display: inline-flex
   align-items: center
   justify-content: center
-
-.logo_button:focus-visible
-  outline: 2px solid white
+  &:focus-visible
+    outline: none
 
 .main_logo
   height: 60px
@@ -118,7 +126,7 @@
   flex-direction: column
   align-items: center
   gap: 5px
-  padding: 0 0
+  padding: 8px 0
   height: 16px
   width: 60px
   background: transparent
@@ -152,7 +160,7 @@
   flex-direction: column
   align-items: center
   justify-content: center
-  padding: 30px 28px 0 28px
+  padding: 40px 28px 0 28px
   background: #ffffff
   border-radius: 22px
   opacity: 0

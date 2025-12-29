@@ -1,7 +1,6 @@
 <script>
 	import '/src/styles/index.sass';
 	import favicon from '$lib/assets/favicon.svg';
-	import Header from '$lib/components/Header.svelte';
 
 	import { page } from '$app/state';
 	import { locales, localizeHref } from '$lib/paraglide/runtime';
@@ -17,7 +16,6 @@
 </svelte:head>
 
 <div class="wrapper">
-	<Header />
 	<main>
 		{@render children()}
 		<div style="display:none">
@@ -33,6 +31,5 @@
 <style lang="sass">
 .wrapper
 	margin: 0 auto
-	padding: 10px 50px
-	// height: 10000px
+	padding: 0 240px 10px 240px
 </style>

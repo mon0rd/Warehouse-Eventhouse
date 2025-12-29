@@ -1,5 +1,5 @@
 @use "/src/styles/base/_variables.sass" as *;
-
+  
 *::before,
 *::after
   box-sizing: border-box
@@ -7,15 +7,17 @@
 body
   font-family: "Poppins", Arial, sans-serif
   scroll-behavior: smooth
-  min-height: 100vh
   background: linear-gradient(
     180deg,
     #000000 0%,
-    #0a0014 95%,
+    #0a0014 85%,
     #0a0013 100%
   )
   color: white
   // max-width: 1440px
+
+html
+  scroll-snap-type: y mandatory
 
 h1,
 h2,

@@ -30,6 +30,15 @@
 
 <style lang="sass">
 .wrapper
+	overflow: visible
 	margin: 0 auto
-	padding: 0 240px 10px 240px
+	padding: 0 10px 10px 10px
+	main
+		overflow: visible
+	@media screen and (min-width: 768px) 
+		padding: 0 60px 10px 60px
+	@media screen and (min-width: 1200px) 
+		padding: 0 180px 10px 180px
+	@media screen and (min-width: 1920px) 
+		padding: 0 240px 10px 240px
 </style>

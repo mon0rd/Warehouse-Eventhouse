@@ -1,5 +1,9 @@
 <script>
 	import Header from '$lib/components/Header.svelte';
+	import Events from '$lib/components/Events.svelte';
+	import ScrollToTop from '$lib/components/ScrollToTop.svelte';
+
+	const { data } = $props();
 
 	const line1 = 'Mehr als ein Club...'.split('');
 	const line2Text = 'Es ist HOUSE';
@@ -48,7 +52,7 @@
 	</h1>
 </section>
 
-<section class="pastandfuture">
+<section id="history" class="pastandfuture">
 	<div class="pastandfuture_wrapper">
 		<h2 class="pastandfuture_title">Our Past & Future</h2>
 		<p class="pastandfuture_descr">
@@ -72,6 +76,12 @@
 	</div>
 </section>
 
+<section id="events" class="events">
+	<Events events={data.events} visibleDesktop={3.2} />
+</section>
+
+<ScrollToTop />
+
 <style lang="sass">
 .hero
   scroll-snap-align: center
@@ -85,7 +95,7 @@
 
 h1
   text-align: center
-  font-size: 80px
+  font-size: clamp(2.5rem, 6vw, 5rem)
   margin: auto 0 auto 0
   font-weight: 400
 
@@ -148,7 +158,7 @@ h1
   scroll-snap-align: center
   scroll-snap-stop: always
   position: relative 
-  height: 97vh
+  min-height: 97vh
   margin: 1.5vh 0  
   background: url("/images/PastAndFutureBG.jpg") no-repeat center center / cover
   overflow: hidden
@@ -181,4 +191,9 @@ h1
     font-size: clamp(1rem, 1.3vw, 1.2rem)
     margin-top: 9rem
 
+.events
+  scroll-snap-align: center
+  scroll-snap-stop: always
+  height: 97vh
+  margin: 10vh 0 1.5vh 0
 </style>

@@ -4,7 +4,12 @@
 
 	let open = false;
 	let mounted = false;
-	const links = ['History', 'Events', 'Impressum', 'Kontakt'];
+	const links = [
+		{ href: '#history', name: 'History' },
+		{ href: '#events', name: 'Events' },
+		{ href: '/impressum', name: 'Impressum' },
+		{ href: '/', name: 'Kontakt' }
+	];
 
 	let headerEl;
 
@@ -79,7 +84,7 @@
 
 		<div class="menu" aria-hidden={!open}>
 			{#each links as link}
-				<a href="/" class="menu_link">{link}</a>
+				<a href={link.href} class="menu_link">{link.name}</a>
 			{/each}
 		</div>
 	</header>

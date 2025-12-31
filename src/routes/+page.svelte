@@ -2,12 +2,13 @@
 	import Header from '$lib/components/Header.svelte';
 	import Events from '$lib/components/Events.svelte';
 	import ScrollToTop from '$lib/components/ScrollToTop.svelte';
+	import Snowfall from '$lib/components/Snowfall.svelte';
 
 	const { data } = $props();
 
 	const line1 = 'Mehr als ein Club...'.split('');
-	const line2Text = 'Es ist HOUSE';
-	const line2Chars = line2Text.split('');
+	const line2 = 'Es ist HOUSE';
+	const line2Chars = line2.split('');
 
 	const offset = 0.8; // when first letter appears
 	const baseGap = 0.1; // minimum gap between letters
@@ -21,12 +22,21 @@
 
 	const line2Delay = delays[delays.length - 1] + 1.2;
 
-	const houseStart = line2Text.indexOf('HOUSE');
+	const houseStart = line2.indexOf('HOUSE');
 	const houseEnd = houseStart + 'HOUSE'.length;
+
+	let showSnow = $state(false);
+
+	function handleHeaderIntroEnd() {
+		showSnow = true;
+	}
 </script>
 
 <section class="hero">
-	<Header />
+	{#if showSnow}
+		<Snowfall />
+	{/if}
+	<Header onIntroEnd={handleHeaderIntroEnd} />
 	<h1>
 		{#each line1 as char, i}
 			<span class="char line1char" style={`--delay:${delays[i]}s`}>
@@ -54,7 +64,7 @@
 
 <section id="history" class="pastandfuture">
 	<div class="pastandfuture_wrapper">
-		<h2 class="pastandfuture_title">Our Past & Future</h2>
+		<h2 class="pastandfuture_title">Unsere Vergangenheit und Zukunft</h2>
 		<p class="pastandfuture_descr">
 			Seit vielen Jahren war das Warehouse weit mehr als nur ein Club: Es war ein kultureller
 			Treffpunkt, eine Bühne für Live-Musik, Partys und besondere Momente. Hier haben Generationen
@@ -95,7 +105,7 @@
 
 h1
   text-align: center
-  font-size: clamp(2.5rem, 6vw, 5rem)
+  font-size: clamp(2.3rem, 6vw, 5rem)
   margin: auto 0 auto 0
   font-weight: 400
 
@@ -167,7 +177,10 @@ h1
   align-items: start
   &_wrapper
     position: relative
-    padding: 2rem 3rem 
+    padding-left: clamp(1rem, 4vw, 3rem)
+    padding-right: clamp(1rem, 4vw, 3rem)
+    padding-top: clamp(1.5rem, 3vw, 2rem)
+    padding-bottom: clamp(1.5rem, 3vw, 2rem)
   &::before
     content: ''
     position: absolute
@@ -184,12 +197,13 @@ h1
     )
     opacity: 1   
   &_title
-    font-size: clamp(2.2rem, 3vw, 3.5rem)
+    font-size: clamp(2rem, 3vw, 3.5rem)
     text-align: center
   &_descr
     text-align: center
     font-size: clamp(1rem, 1.3vw, 1.2rem)
-    margin-top: 9rem
+    line-height: clamp(1.3, 1.6, 1.46)
+    margin-top: clamp(3rem, 10vw, 9rem)
 
 .events
   scroll-snap-align: center

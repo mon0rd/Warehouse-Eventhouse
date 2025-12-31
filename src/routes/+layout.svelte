@@ -10,6 +10,7 @@
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
+	<link rel="preload" href="/fonts/Poppins-Regular.woff2" as="font" type="font/woff2" crossorigin />
 	<meta name="description" content="Event Management, we Organise your events" />
 	<meta name="author" content="Tetiana" />
 	<title>Warehouse Eventhouse</title>

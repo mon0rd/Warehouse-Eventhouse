@@ -2,6 +2,8 @@
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
 
+	export let onIntroEnd = () => {};
+
 	let open = false;
 	let mounted = false;
 	const links = [
@@ -59,7 +61,13 @@
 </script>
 
 {#if mounted}
-	<header class="header" class:open bind:this={headerEl} in:fade={{ duration: 600 }}>
+	<header
+		class="header"
+		class:open
+		bind:this={headerEl}
+		in:fade={{ duration: 600 }}
+		onintroend={onIntroEnd}
+	>
 		<button
 			type="button"
 			class="logo_button"
@@ -67,7 +75,10 @@
 			aria-expanded={open}
 			onclick={() => (open = !open)}
 		>
-			<img src="/images/MainLogo.jpg" alt="Warehouse Eventhouse logo" class="main_logo" />
+			<span class="logo_wrap">
+				<img src="/images/MainLogo.jpg" alt="Warehouse Eventhouse logo" class="main_logo" />
+				<img src="/images/SantaHat.avif" alt="SantaHat" class="santa_hat" aria-hidden="true" />
+			</span>
 		</button>
 
 		<button
@@ -106,6 +117,9 @@
   --menu-width: 122.5px
   --menu-height: 150px
   --menu-top-offset: 22px
+.logo_wrap
+  position: relative
+  display: inline-block
 
 .logo_button
   padding: 0
@@ -118,11 +132,21 @@
   &:focus-visible
     outline: none
 
-.main_logo
+.main_logo  
+  position: relative
   height: 60px
   border-radius: 15px
   display: block
   z-index: 5
+
+.santa_hat
+  position: absolute
+  top: -25px        
+  right: -36px
+  width: 80px      
+  transform: rotate(26deg)
+  pointer-events: none
+  z-index: 6
 
 .nav
   position: relative

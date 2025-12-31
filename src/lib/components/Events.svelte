@@ -1,11 +1,14 @@
 <!-- Events.svelte -->
 <script>
+	import { onMount, onDestroy } from 'svelte';
+
 	const { events, visibleDesktop = 3.2 } = $props();
 
 	let currentIndex = $state(0);
 
+	let visibleCount = $derived(visibleDesktop);
 	// width of one card in percentage of viewport
-	const cardWidth = $derived(100 / visibleDesktop);
+	const cardWidth = $derived(100 / visibleCount);
 	// gap between cards in %
 	const gap = 1.5;
 	// how wide the whole track is
@@ -14,9 +17,9 @@
 	// how much the track overflows the viewport (in %)
 	const overflow = $derived(Math.max(0, trackWidth - 100));
 
-	const maxIndex = $derived(Math.max(0, events.length - Math.floor(visibleDesktop)));
+	const maxIndex = $derived(Math.max(0, events.length - Math.floor(visibleCount)));
 
-	// how far we should shift for the current index
+	// how far slider should shift for the current index
 	const offset = $derived(maxIndex > 0 ? (overflow * currentIndex) / maxIndex : 0);
 
 	function next() {
@@ -26,6 +29,27 @@
 	function prev() {
 		if (currentIndex > 0) currentIndex -= 1;
 	}
+
+	onMount(() => {
+		function updateVisible() {
+			const w = window.innerWidth;
+
+			if (w <= 600) {
+				visibleCount = 1.2;
+			} else if (w <= 1024) {
+				visibleCount = 2.1;
+			} else {
+				visibleCount = visibleDesktop;
+			}
+		}
+
+		updateVisible();
+		window.addEventListener('resize', updateVisible);
+
+		return () => {
+			window.removeEventListener('resize', updateVisible);
+		};
+	});
 </script>
 
 <div class="events_wrapper">
@@ -49,7 +73,7 @@
 						class="card"
 						target="_blank"
 						rel="noopener noreferrer"
-						style={`flex: 0 0 calc(100% / ${visibleDesktop});`}
+						style={`flex: 0 0 calc(100% / ${visibleCount});`}
 					>
 						<div class="image_wrapper">
 							<img src={event.image} alt={event.title} loading="lazy" />
@@ -164,9 +188,7 @@
             width: 100%
             border-radius: 1.2rem
             height: 100%
-            // object-fit: cover
             display: block
-            // transform: scale(1.02)
             transition: transform 0.4s ease
         .card:hover & img
             transform: scale(1.05)
@@ -241,6 +263,9 @@
   .card
     flex: 0 0 80%
     scroll-snap-align: start
+
+  .body
+    transform: translateY(0%)
 
   .navButton
     display: none

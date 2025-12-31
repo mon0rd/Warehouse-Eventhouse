@@ -3,27 +3,27 @@
 		"title": "Hauptstadtball",
 		"date": "Sa, 10.01.2026",
 		"location": "St. Pölten 2026",
-		"image": "/images/Hauptstadtball.jpg",
+		"image": "/images/Hauptstadtball.avif",
 		"link": "https://www.oeticket.com/eventseries/hauptstadtball-st-poelten-2026-4014009/#calendar-start=2026-01"
 	},
 	{
 		"title": "Hennes VS Manchee",
-		"date": "Sa, 17.01.2026",
-		"location": "Warehouse Eventhouse",
-		"image": "/images/CottageClub.jpg",
+		"date": "Sa, 17.01.2026, 21:00 Uhr",
+		"location": "Kelsengasse 9, 3100 St. Pölten",
+		"image": "/images/HennesVSManchee.avif",
 		"link": "https://example.com/opening-night"
 	},
 	{
 		"title": "Cottage Club",
 		"date": "Sa, 17.01.2026, 21:00 Uhr",
-		"location": "Kelsengasse 9 - 3100 St. Pölten",
-		"image": "/images/CottageClub.jpg",
+		"location": "Kelsengasse 9, 3100 St. Pölten",
+		"image": "/images/Cottage-Club-Story.avif",
 		"link": "https://example.com/opening-night"
 	},
 	{
 		"title": "Masters of Hardcore",
 		"date": "Sa, 24.02.2026, 19:00 Uhr",
-		"location": "Kelsengasse 9 - 3100 St. Pölten",
+		"location": "Kelsengasse 9, 3100 St. Pölten",
 		"image": "/images/MastersOfHardcore.webp",
 		"link": "https://events.tickethead.io/de/tickethead/event/3340"
 	}
